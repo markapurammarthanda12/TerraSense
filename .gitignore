@@ -1,0 +1,4 @@
+# Ignore generated map images and temporary outputs
+map_before_*.png
+map_after_*.png
+temp/

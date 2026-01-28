@@ -164,9 +164,11 @@ if not df.empty and 'Predicted_SOC' in df.columns:
         with st.status("🚀 Generating Comparison...", expanded=True) as status:
             # Timestamp busts browser cache
             timestamp = int(time.time())
-            file_before = f"map_before_{timestamp}.png"
-            file_after = f"map_after_{timestamp}.png"
-            
+            # Ensure temporary folder exists for generated images
+            os.makedirs("temp", exist_ok=True)
+            file_before = f"temp/map_before_{timestamp}.png"
+            file_after = f"temp/map_after_{timestamp}.png"
+
             vmin, vmax = df['Predicted_SOC'].min(), df['Predicted_SOC'].max()
             save_map_image(df, 'Predicted_SOC', vmin, vmax, file_before)
             save_map_image(df, 'Simulated_SOC', vmin, vmax, file_after)
